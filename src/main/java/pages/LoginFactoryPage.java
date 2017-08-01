@@ -8,19 +8,19 @@ import org.openqa.selenium.support.ui.Select;
 
 public class LoginFactoryPage {
     @FindBy(id = "mailbox__login")
-    public WebElement usernameField;
+    private WebElement usernameField;
 
     @FindBy(id = "mailbox__password")
-    public WebElement passwordField;
+    private WebElement passwordField;
 
     @FindBy(id = "mailbox__auth__button")
-    public WebElement loginButton;
+    private WebElement loginButton;
 
     @FindBy(id = "mailbox__login__domain")
-    public WebElement loginDomainDropDown;
+    private WebElement loginDomainDropDown;
 
     @FindBy(id = "PH_authLink")
-    public WebElement loginLink;
+    private WebElement loginLink;
 
     public LoginFactoryPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
@@ -29,8 +29,16 @@ public class LoginFactoryPage {
     public void login(String userName, String password, String domain) {
         usernameField.sendKeys(userName);
         passwordField.sendKeys(password);
+        selectDomain(domain);
+        loginButton.click();
+    }
+
+    private void selectDomain(String domain){
         Select loginDomainDrop = new Select(loginDomainDropDown);
         loginDomainDrop.selectByValue(domain);
-        loginButton.click();
+    }
+
+    public boolean isLoginLinkDisplayed() {
+        return loginLink.isDisplayed();
     }
 }

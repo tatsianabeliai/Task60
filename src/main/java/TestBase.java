@@ -1,26 +1,17 @@
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
 import java.util.concurrent.TimeUnit;
 
 public class TestBase {
-    public static final int DEFAULT_TIMEOUT = 10;
-    public WebDriver driver;
-
+    private static final int DEFAULT_TIMEOUT = 10;
     protected String baseUrl;
+    protected WebDriver driver;
 
-    public TestBase(String baseUrl) {
+    protected TestBase(String baseUrl) {
         this.baseUrl = baseUrl;
-    }
-
-    public void waitForAllElements() {
-        WebDriverWait waitElements = new WebDriverWait(driver, DEFAULT_TIMEOUT);
-        waitElements.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*")));
     }
 
     @BeforeSuite

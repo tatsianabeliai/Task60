@@ -1,33 +1,32 @@
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.EmailsFactoryPage;
+import pages.EmailFactoryPage;
 import pages.LoginFactoryPage;
 
 public class PageFactoryTest extends TestBase {
-    public static String siteURL = "https://mail.ru/";
-    public String userName = "seleniumtests10";
-    public String password = "060788avavav";
-    public String domain = "mail.ru";
+    private static final String SITE_URL = "https://mail.ru/";
+    private static final String USER_NAME = "seleniumtests10";
+    private static final String PASSWORD = "060788avavav";
+    private static final String DOMAIN = "mail.ru";
 
     public PageFactoryTest() {
-        super(siteURL);
+        super(SITE_URL);
     }
 
     @Test
     public void login() {
         LoginFactoryPage loginFactoryPage = PageFactory.initElements(driver, LoginFactoryPage.class);
-        loginFactoryPage.login(userName, password, domain);
-        waitForAllElements();
-        EmailsFactoryPage emailsFactoryPage = PageFactory.initElements(driver, EmailsFactoryPage.class);
-        Assert.assertTrue(emailsFactoryPage.loginedUserNameAtTop.isDisplayed(), "Logout link is displayed so user is not logged in");
+        loginFactoryPage.login(USER_NAME, PASSWORD, DOMAIN);
+        EmailFactoryPage emailFactoryPage = PageFactory.initElements(driver, EmailFactoryPage.class);
+        Assert.assertTrue(emailFactoryPage.isLoginedUserNameDisplayed(), "Logout link is displayed so user is not logged in");
     }
 
     @Test(dependsOnMethods = "login")
-    public void logout(){
-        EmailsFactoryPage emailsFactoryPage = PageFactory.initElements(driver, EmailsFactoryPage.class);
-        emailsFactoryPage.logout();
+    public void logout() {
+        EmailFactoryPage emailFactoryPage = PageFactory.initElements(driver, EmailFactoryPage.class);
+        emailFactoryPage.logout();
         LoginFactoryPage loginFactoryPage = PageFactory.initElements(driver, LoginFactoryPage.class);
-        Assert.assertTrue(loginFactoryPage.loginLink.isDisplayed(), "No Login link so the user is logined");
+        Assert.assertTrue(loginFactoryPage.isLoginLinkDisplayed(), "No Login link so the user is logined");
     }
 }
