@@ -8,10 +8,10 @@ import pages.LoginPageObjectPage;
 
 public class PageObjectTest {
 
-    public static final String BASE_URL = "https://mail.ru/";
-    public String userName = "seleniumtests10";
-    public String password = "060788avavav";
-    public String domain = "mail.ru";
+    private static final String BASE_URL = "https://mail.ru/";
+    private static final String USERNAME = "seleniumtests10";
+    private static final String PASSWORD = "060788avavav";
+    private static final String DOMAIN = "mail.ru";
 
     @BeforeSuite(alwaysRun = true)
     public void setup() {
@@ -26,8 +26,9 @@ public class PageObjectTest {
     @Test
     public void login() {
         LoginPageObjectPage loginPageObjectPage = new LoginPageObjectPage();
-        loginPageObjectPage.login(userName, password, domain);
-        Assert.assertTrue(DriverSingleton.getDriver().findElement(EmailsPageObjectPage.LOGINED_USERNAME_AT_TOP).isDisplayed(),
+        loginPageObjectPage.login(USERNAME, PASSWORD, DOMAIN);
+        EmailsPageObjectPage emailsPageObjectPage = new EmailsPageObjectPage();
+        Assert.assertTrue(emailsPageObjectPage.isLoginedUsernameDisplayedAtTop(),
                 "The user is not logged in");
     }
 
@@ -35,7 +36,8 @@ public class PageObjectTest {
     public void logout() {
         EmailsPageObjectPage emailsPageObjectPage = new EmailsPageObjectPage();
         emailsPageObjectPage.logout();
-        Assert.assertTrue(DriverSingleton.getDriver().findElement(LoginPageObjectPage.LOGIN_LINK).isDisplayed(),
+        LoginPageObjectPage loginPageObjectPage = new LoginPageObjectPage();
+        Assert.assertTrue(loginPageObjectPage.isLoginLinkDisplayed(),
                 "User is not logged out");
     }
 }
