@@ -8,7 +8,6 @@ import java.util.concurrent.TimeUnit;
 public class TestBase {
     private static final int DEFAULT_TIMEOUT = 10;
     WebDriver driver;
-
     private String baseUrl;
 
     TestBase(String baseUrl) {
