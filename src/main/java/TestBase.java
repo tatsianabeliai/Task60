@@ -1,5 +1,8 @@
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
@@ -12,6 +15,11 @@ public class TestBase {
 
     TestBase(String baseUrl) {
         this.baseUrl = baseUrl;
+    }
+
+    void waitForAllElements() {
+        WebDriverWait waitElements = new WebDriverWait(driver, DEFAULT_TIMEOUT);
+        waitElements.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*")));
     }
 
     @BeforeSuite
