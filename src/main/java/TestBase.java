@@ -10,16 +10,11 @@ import java.util.concurrent.TimeUnit;
 
 public class TestBase {
     private static final int DEFAULT_TIMEOUT = 10;
-    WebDriver driver;
-    private String baseUrl;
+    protected String baseUrl;
+    protected WebDriver driver;
 
-    TestBase(String baseUrl) {
+    protected TestBase(String baseUrl) {
         this.baseUrl = baseUrl;
-    }
-
-    void waitForAllElements() {
-        WebDriverWait waitElements = new WebDriverWait(driver, DEFAULT_TIMEOUT);
-        waitElements.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*")));
     }
 
     @BeforeSuite
