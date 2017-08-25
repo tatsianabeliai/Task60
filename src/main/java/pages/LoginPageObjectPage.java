@@ -12,14 +12,14 @@ public class LoginPageObjectPage {
     private static final By PASSWORD_FIELD = By.id("mailbox__password");
     private static final By LOGIN_BUTTON = By.id("mailbox__auth__button");
     private static final By LOGIN_LINK = By.id("PH_authLink");
-    private static WebDriver driver;
+    private static WebDriver driver = DriverSingleton.getDriver();
 
-    public void login(String userName, String password, String domain) {
-        driver = DriverSingleton.getDriver();
+    public EmailsPageObjectPage login(String userName, String password, String domain) {
         driver.findElement(USERNAME_FIELD).sendKeys(userName);
         driver.findElement(PASSWORD_FIELD).sendKeys(password);
         selectDomain(domain);
         driver.findElement(LOGIN_BUTTON).click();
+        return new EmailsPageObjectPage();
     }
 
     private void selectDomain(String domain) {

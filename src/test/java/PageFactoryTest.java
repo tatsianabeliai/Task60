@@ -18,13 +18,12 @@ public class PageFactoryTest extends TestBase {
     public void login() {
         LoginFactoryPage loginFactoryPage = PageFactory.initElements(driver, LoginFactoryPage.class);
         loginFactoryPage.login(userName, password, domain);
-        waitForAllElements();
         EmailsFactoryPage emailsFactoryPage = PageFactory.initElements(driver, EmailsFactoryPage.class);
         Assert.assertTrue(emailsFactoryPage.loginedUserNameAtTop.isDisplayed(), "Logout link is displayed so user is not logged in");
     }
 
     @Test(dependsOnMethods = "login")
-    public void logout(){
+    public void logout() {
         EmailsFactoryPage emailsFactoryPage = PageFactory.initElements(driver, EmailsFactoryPage.class);
         emailsFactoryPage.logout();
         LoginFactoryPage loginFactoryPage = PageFactory.initElements(driver, LoginFactoryPage.class);

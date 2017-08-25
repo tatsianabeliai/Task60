@@ -26,8 +26,7 @@ public class PageObjectTest {
     @Test
     public void login() {
         LoginPageObjectPage loginPageObjectPage = new LoginPageObjectPage();
-        loginPageObjectPage.login(USERNAME, PASSWORD, DOMAIN);
-        EmailsPageObjectPage emailsPageObjectPage = new EmailsPageObjectPage();
+        EmailsPageObjectPage emailsPageObjectPage = loginPageObjectPage.login(USERNAME, PASSWORD, DOMAIN);
         Assert.assertTrue(emailsPageObjectPage.isLoginedUsernameDisplayedAtTop(),
                 "The user is not logged in");
     }
@@ -35,8 +34,7 @@ public class PageObjectTest {
     @Test(dependsOnMethods = "login")
     public void logout() {
         EmailsPageObjectPage emailsPageObjectPage = new EmailsPageObjectPage();
-        emailsPageObjectPage.logout();
-        LoginPageObjectPage loginPageObjectPage = new LoginPageObjectPage();
+        LoginPageObjectPage loginPageObjectPage = emailsPageObjectPage.logout();
         Assert.assertTrue(loginPageObjectPage.isLoginLinkDisplayed(),
                 "User is not logged out");
     }
